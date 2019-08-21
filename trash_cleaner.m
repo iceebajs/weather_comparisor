@@ -1,5 +1,5 @@
 function input = trash_cleaner(input)
-
+%cleaning xls file
 input(56) = [];
 input(55) = [];
 input(45) = [];
