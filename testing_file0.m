@@ -53,7 +53,7 @@ forecast_wind_d = trash_cleaner(forecast_wind_d);
 
 
 
-%============== night_output
+%============== night_output =================================
 xlswrite([pwd, '/output_table.xlsx'], fact_t_n, 1, 'C4:C55');
 xlswrite([pwd, '/output_table.xlsx'], forecast_t_n, 1, 'D4:D55');
 xlswrite([pwd, '/output_table.xlsx'], t_night, 1, 'E4:E55');
@@ -67,7 +67,7 @@ xlswrite([pwd, '/output_table.xlsx'], fact_phen_n, 1, 'I4:I55');
 xlswrite([pwd, '/output_table.xlsx'], forecast_phen_n, 1, 'J4:J55');
 xlswrite([pwd, '/output_table.xlsx'], phen_n, 1, 'K4:K55');
 %}
-%============= day_output
+%============= day_output ================================
 xlswrite([pwd, '/output_table.xlsx'], fact_t_d, 2, 'C4:C55');
 xlswrite([pwd, '/output_table.xlsx'], forecast_t_d, 2, 'D4:D55');
 xlswrite([pwd, '/output_table.xlsx'], t_day, 2, 'E4:E55');
