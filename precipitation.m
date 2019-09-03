@@ -29,7 +29,7 @@ for n  = 1:length(fact_p)
     end
     
     if isnan(p1) || isnan(p2)
-        assessment_p{n} = 0;    
+        assessment_p{n} = 'NaN';    
     elseif p1 > t_lim
         if p2 == 1
             if p1 >= 0 && p1 <= 0.3

@@ -8,6 +8,8 @@ for n  = 1:length(fact_t)
         assessment_t{n} = 100;
     elseif temp <= 3
         assessment_t{n} = 50;
+    elseif isnan(temp)
+        assessment_t{n} = 'NaN';
     else
         assessment_t{n} = 0;
     end
