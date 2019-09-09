@@ -7,11 +7,12 @@ for n  = 1:length(fact_p)
         fact_p{n} = erase(fact_p{n},'<');
         fact_p{n} = strrep(fact_p{n},',','.');
     end
-    
-    if ~isnan(forecast_p{n}) && ~isnumeric(forecast_p{n})
+    %{
+    if ~isnan(sum(forecast_p{n})) && ~isnumeric(forecast_p{n})
         forecast_p{n} = erase(forecast_p{n},'<');
         forecast_p{n} = strrep(forecast_p{n},',','.');
     end
+    %}
 end
 clear n
 

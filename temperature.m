@@ -16,17 +16,22 @@ end
 clear n
 
 for n  = 1:length(fact_t)
-    if ~isnan(forecast_t{n})        
-        if fact_t{n} <= forecast_t{n}(1)
-            temp = abs(fact_t{n}-forecast_t{n}(1));
-        elseif fact_t{n} >= forecast_t{n}(2)
-            temp = abs(fact_t{n}-forecast_t{n}(2));
-        elseif fact_t{n} > forecast_t{n}(1) && fact_t{n} < forecast_t{n}(2)
-            assessment_t{n} = 100;
+    temp = NaN;
+    if ~isnan(forecast_t{n})
+        if length(forecast_t{n}) < 2
+            assessment_t{n} = 'Îøèáêà';
             continue;
+        else
+            if fact_t{n} <= forecast_t{n}(1)
+                temp = abs(fact_t{n}-forecast_t{n}(1));
+            elseif fact_t{n} >= forecast_t{n}(2)
+                temp = abs(fact_t{n}-forecast_t{n}(2));
+            elseif fact_t{n} > forecast_t{n}(1) && fact_t{n} < forecast_t{n}(2)
+                assessment_t{n} = 100;
+                continue;
+            end
         end
     end
-    
     if temp <= 2
         assessment_t{n} = 100;
     elseif temp <= 3
@@ -35,7 +40,7 @@ for n  = 1:length(fact_t)
         assessment_t{n} = 'NaN';
     else
         assessment_t{n} = 0;
-    end    
+    end
 end
 
 end
