@@ -1,4 +1,4 @@
-function assessment_p = precipitation(fact_p,forecast_p, t_lim)
+function assessment_p = precipitation(fact_p,forecast_p, fact_t, t_lim)
 
 assessment_p{length(fact_p),1} = {};
 
@@ -14,7 +14,15 @@ for n  = 1:length(fact_p)
     end
     %}
 end
+
+if ~isnan(sum(fact_t{n})) && ~isnumeric(fact_t{n})
+    for n  = 1:length(fact_t)
+        fact_t{n} = str2num(fact_t{n});
+    end
+end
+
 clear n
+
 
 for n  = 1:length(fact_p)
     if isnumeric(fact_p{n})
@@ -30,8 +38,10 @@ for n  = 1:length(fact_p)
     end
     
     if isnan(p1) || isnan(p2)
-        assessment_p{n} = 'NaN';    
-    elseif p1 > t_lim
+        assessment_p{n} = NaN;
+    elseif isnan(fact_t{n})
+        assessment_p{n} = 'Нет температуры';
+    elseif fact_t{n} > t_lim
         if p2 == 1
             if p1 >= 0 && p1 <= 0.3
                 assessment_p{n} = 100;

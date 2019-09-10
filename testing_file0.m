@@ -1,6 +1,6 @@
 clc
 clear
-try
+%try
     %temperature_limit
     t_lim = -5;
     % =============================== night ===================================
@@ -11,7 +11,7 @@ try
     
     [~,~,fact_p_n] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'F5:F67');
     [~,~,forecast_p_n] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'G5:G67');
-    p_night = precipitation(fact_p_n, forecast_p_n, t_lim);
+    p_night = precipitation(fact_p_n, forecast_p_n, fact_t_n, t_lim);
     
     %==================== phenomenons =========================================
     [~,~,forecast_wind_n] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'I5:I67');
@@ -20,7 +20,7 @@ try
     
     [~,~,phen_fore_n] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'J5:T67');
     [~,~,phen_fact_n] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'V5:AF67');
-    % assessment = phen_assessment(wind_night, 0, phen_fore, phen_fact);
+    assessment_night = phen_assessment(wind_night, phen_fore_n, phen_fact_n);
     
     % =============================== day =====================================
     % =========================================================================
@@ -31,13 +31,16 @@ try
     
     [~,~,fact_p_d] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'AM5:AM67');
     [~,~,forecast_p_d] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'AN5:AN67');
-    p_day = precipitation(fact_p_d, forecast_p_d, t_lim);
+    p_day = precipitation(fact_p_d, forecast_p_d, fact_t_d, t_lim);
     
     %==================== phenomenons =========================================
     [~,~,fact_wind_d] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'AP5:AP67');
     [~,~,forecast_wind_d] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'BB5:BB67');
     wind_day = wind_func(fact_wind_d, forecast_wind_d);
     
+    [~,~,phen_fore_d] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'AQ5:BA67');
+    [~,~,phen_fact_d] = xlsread([pwd, '/new_data_sample_test.xlsx'], 1,'BC5:BM67');
+    assessment_day = phen_assessment(wind_day, phen_fore_d, phen_fact_d);
     
     % ============== night_output =============================================
     % =========================================================================
@@ -53,7 +56,9 @@ try
     % =============== phenomenon assessment night ==============
     xlswrite([pwd, '/output_table.xlsx'], fact_wind_n, 1, 'I5:I67');
     xlswrite([pwd, '/output_table.xlsx'], forecast_wind_n, 1, 'U5:U67');
-    %xlswrite([pwd, '/output_table.xlsx'], forecast_phen_n, 1, 'T5:T67');
+    xlswrite([pwd, '/output_table.xlsx'], phen_fact_n, 1, 'J5:T67');
+    xlswrite([pwd, '/output_table.xlsx'], phen_fore_n, 1, 'V5:AF67');    
+    xlswrite([pwd, '/output_table.xlsx'], assessment_night, 1, 'AG5:AG67');
     
     % ============= day_output ================================================
     % =========================================================================
@@ -69,7 +74,9 @@ try
     % =============== phenomenon assessment day ==============
     xlswrite([pwd, '/output_table.xlsx'], fact_wind_d, 2, 'I5:I67');
     xlswrite([pwd, '/output_table.xlsx'], forecast_wind_d, 2, 'U5:U67');
-    %xlswrite([pwd, '/output_table.xlsx'], forecast_phen_n, 1, 'T5:T67');
-catch
-    warning('Problem reading xlsx file');
-end
+    xlswrite([pwd, '/output_table.xlsx'], phen_fact_d, 2, 'J5:T67');
+    xlswrite([pwd, '/output_table.xlsx'], phen_fore_d, 2, 'V5:AF67');    
+    xlswrite([pwd, '/output_table.xlsx'], assessment_day, 2, 'AG5:AG67');
+%catch EX
+    %warning(EX.message);
+%end
