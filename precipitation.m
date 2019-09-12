@@ -74,6 +74,8 @@ for n  = 1:length(fact_p)
             else %if p1 < 7 || p1 >=50
                 assessment_p{n} = 0;
             end
+        else
+            assessment_p{n} = NaN;
         end
     else
         if p2 == 1
@@ -108,6 +110,8 @@ for n  = 1:length(fact_p)
             else %if p1 < 3 || p1 >=20
                 assessment_p{n} = 0;
             end
+        else
+            assessment_p{n} = NaN;
         end
     end
 end

@@ -3,7 +3,14 @@ temp = cell(size([wind,phen_fore]));
 assessment = zeros(length(temp(:,1)),1);
 temp(:,1) = wind;
 for j = 2:length(phen_fore(1,:))+1
-    for i = 1:length(phen_fore(:,1))        
+    for i = 1:length(phen_fore(:,1)) 
+        if isempty(phen_fact{i,j-1})
+            phen_fact{i,j-1} = NaN;
+        end
+        if isempty(phen_fore{i,j-1})
+            phen_fore{i,j-1} = NaN;
+        end
+        
         if ~isnan(phen_fore{i,j-1}) && ~isnan(phen_fact{i,j-1})
             temp{i,j} = 100;
         elseif ~isnan(phen_fore{i,j-1}) && isnan(phen_fact{i,j-1})
