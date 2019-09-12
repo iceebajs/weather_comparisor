@@ -7,11 +7,12 @@ for n  = 1:length(forecast_t)
         forecast_t{n} = str2num(forecast_t{n});
     end
 end
+clear n
 
-if ~isnan(sum(fact_t{n})) && ~isnumeric(fact_t{n})
-    for n  = 1:length(fact_t)
+for n = 1:length(fact_t)
+    if ~isnan(sum(fact_t{n})) && ~isnumeric(fact_t{n})        
         fact_t{n} = str2num(fact_t{n});
-    end
+    end    
 end
 clear n
 
