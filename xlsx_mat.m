@@ -13,10 +13,9 @@ clear
 % night_table{2,15} = 'налип.снега';
 % day_table{2,27} = 'налип.снега';
 % night_table{2,27} = 'налип.снега';
-% 
-% 
 % save('day.mat', 'day_table');
 % save('night.mat', 'night_table');
+
 % [~,night_assessment,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 1,'A2:AH67');
 % [~,day_assessment,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 2,'A2:AH67');
 % save('night_assessment.mat', 'night_assessment');
