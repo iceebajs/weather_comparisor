@@ -39,7 +39,7 @@ for n  = 1:length(fact_p)
     
     if isnan(p1) || isnan(p2)
         assessment_p{n} = NaN;
-    elseif isnan(fact_t{n})
+    elseif isnan(sum(fact_t{n})) || isempty(fact_t{n})
         assessment_p{n} = 'Нет температуры';
     elseif fact_t{n} > t_lim
         if p2 == 1
