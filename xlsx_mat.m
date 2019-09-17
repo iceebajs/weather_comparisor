@@ -17,7 +17,13 @@ clear
 % 
 % save('day.mat', 'day_table');
 % save('night.mat', 'night_table');
-[~,night_assessment,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 1,'A2:AH67');
-[~,day_assessment,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 2,'A2:AH67');
+% [~,night_assessment,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 1,'A2:AH67');
+% [~,day_assessment,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 2,'A2:AH67');
 % save('night_assessment.mat', 'night_assessment');
 % save('day_assessment.mat', 'day_assessment');
+
+[~,assessment_fullday,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 3,'A2:E68');
+assessment_fullday{2,5} = assessment_fullday{1,5};
+assessment_fullday(1,:) = [];
+assessment_fullday(3,:) = [];
+save('assessment_fullday.mat', 'assessment_fullday');
