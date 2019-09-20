@@ -20,9 +20,17 @@ clear
 % [~,day_assessment,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 2,'A2:AH67');
 % save('night_assessment.mat', 'night_assessment');
 % save('day_assessment.mat', 'day_assessment');
+% 
+% [~,assessment_fullday,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 3,'A2:E68');
+% assessment_fullday{2,5} = assessment_fullday{1,5};
+% assessment_fullday(1,:) = [];
+% assessment_fullday(3,:) = [];
+% save('assessment_fullday.mat', 'assessment_fullday');
 
-[~,assessment_fullday,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 3,'A2:E68');
-assessment_fullday{2,5} = assessment_fullday{1,5};
-assessment_fullday(1,:) = [];
-assessment_fullday(3,:) = [];
-save('assessment_fullday.mat', 'assessment_fullday');
+[~,territorial_assessment,~] = xlsread([pwd, '/bin/оценка_прогнозирования.xlsx'], 4,'A1:M12');
+territorial_assessment(9,:) = [];
+territorial_assessment(7,:) = [];
+territorial_assessment(6,:) = [];
+territorial_assessment(5,:) = [];
+territorial_assessment(2,:) = [];
+save('territorial_assessment.mat', 'territorial_assessment');
