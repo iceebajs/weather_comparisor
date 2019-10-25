@@ -4,6 +4,6 @@
 *.ico
 *.jpg
 *.png
-*/Easyassessment_resources/
-*/Easyassessment/
+*Easyassessment_resources/
+*Easyassessment/
 *.gif
