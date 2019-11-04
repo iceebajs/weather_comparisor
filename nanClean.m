@@ -4,7 +4,7 @@ if (~iscell(input))
 end
 for n = 1:length(input)
     if(isnan(input{n}))
-        input{n} = ' ';
+        input{n} = '';
     end
 end
 out = input;
