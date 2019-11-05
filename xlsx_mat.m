@@ -74,9 +74,59 @@ clear
 % save('calc_table.mat', 'calc_table');
 
 
-normData = table2cell(readtable('нормы_1981-2010.xlsx'));
-normData(3,:) = [];
-normData(2,:) = [];
-normData(1,:) = [];
-normData(:,16) = [];
-save('normData.mat', 'normData');
+% normData = table2cell(readtable('нормы_1981-2010.xlsx'));
+% normData(3,:) = [];
+% normData(2,:) = [];
+% normData(1,:) = [];
+% normData(:,16) = [];
+% save('normData.mat', 'normData');
+% 
+% temp = table2cell(readtable('доп_оценка_ќсадки.xlsx'));
+% temp(2,:) = [];
+% calc_table_p = cell(length(temp(:,1))+1, length(temp(1,:)));
+% 
+% for n = 1:length(calc_table_p(1,:))
+%     calc_table_p(2:end,n) = temp(1:end,n);
+% end
+% 
+% for n = 1:length(calc_table_p)
+%     calc_table_p{n,9} = [];
+% end
+% 
+% calc_table_p{1,3} = 'ќ—јƒ » ночь';
+% calc_table_p{1,6} = 'ќ—јƒ » день';
+% calc_table_p{2,1} = 'ќбласть';
+% calc_table_p{2,2} = '—танци€';
+% 
+% save('calc_table_p.mat', 'calc_table_p');
+
+temp = table2cell(readtable('доп_оценка_явлени€.xlsx'));
+temp(2,:) = [];
+temp(:, 28) = [];
+calc_table_phen = cell(length(temp(:,1))+1, length(temp(1,:)));
+
+for n = 1:length(calc_table_phen(1,:))
+    calc_table_phen(2:end,n) = temp(1:end,n);
+end
+
+
+
+calc_table_phen{1,3} = 'явлени€ фактические ночь';
+calc_table_phen{1,28} = 'явлени€ фактические день';
+calc_table_phen{2,1} = 'ќбласть';
+calc_table_phen{2,2} = '—танци€';
+
+calc_table_phen{14,2} = '';
+calc_table_phen{15,2} = '';
+calc_table_phen{23,2} = '';
+calc_table_phen{24,2} = '';
+calc_table_phen{37,2} = '';
+calc_table_phen{38,2} = '';
+calc_table_phen{46,2} = '';
+calc_table_phen{47,2} = '';
+calc_table_phen{57,2} = '';
+calc_table_phen{58,2} = '';
+calc_table_phen{66,2} = '';
+calc_table_phen{67,2} = '';
+
+save('calc_table_phen.mat', 'calc_table_phen');

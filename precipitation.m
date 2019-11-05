@@ -17,7 +17,7 @@ try
     
     for n  = 1:length(fact_t)
         if ~isnan(sum(fact_t{n})) && ~isnumeric(fact_t{n})
-            fact_t{n} = str2num(fact_t{n});
+            fact_t{n} = str2double(fact_t{n});
         end
     end
     

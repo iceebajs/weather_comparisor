@@ -20,16 +20,22 @@ try
                 assessment_t{n} = 'Ошибка';
                 continue;
             else
-                if fact_t{n} <= forecast_t{n}(1)
-                    temp = abs(fact_t{n}-forecast_t{n}(1));
-                elseif fact_t{n} >= forecast_t{n}(2)
-                    temp = abs(fact_t{n}-forecast_t{n}(2));
-                elseif fact_t{n} > forecast_t{n}(1) && fact_t{n} < forecast_t{n}(2)
-                    assessment_t{n} = 100;
+                if ~isempty(fact_t{n}) && ~isempty(forecast_t{n})
+                    if fact_t{n} <= forecast_t{n}(1)
+                        temp = abs(fact_t{n}-forecast_t{n}(1));
+                    elseif fact_t{n} >= forecast_t{n}(2)
+                        temp = abs(fact_t{n}-forecast_t{n}(2));
+                    elseif fact_t{n} > forecast_t{n}(1) && fact_t{n} < forecast_t{n}(2)
+                        assessment_t{n} = 100;
+                        continue;
+                    end
+                else
+                    assessment_t{n} = 'Ошибка';
                     continue;
                 end
             end
         end
+        
         if temp <= 2
             assessment_t{n} = 100;
         elseif temp <= 3
