@@ -40,7 +40,9 @@ try
             nanLogical1 = isnan(temp1);
             temp0(nanLogical0) = [];
             temp1(nanLogical1) = [];
-            out{1} = num2str(corr2(temp0, temp1), 3);
+            temp0 = temp0 - mean(temp0);
+            temp1 = temp1 - mean(temp1);            
+            out{1} = num2str(sum(sum(temp0.*temp1))/sqrt(sum(sum(temp0.*temp0))*sum(sum(temp1.*temp1))), 3); 
         end
     end
 catch
