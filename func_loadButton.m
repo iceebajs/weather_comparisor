@@ -5,60 +5,103 @@ function [night_assessment, day_assessment, assessment_fullday, territorial_asse
 
     % =============================== night ===================================
     % =========================================================================
-    stations = table2cell(data(4:68,2));
-    phenomenons = table2cell(data(2,9:20));
-    
-    fact_t_n = table2cell(data(4:68,3));
-    forecast_t_n = table2cell(data(4:68,4));
-    t_night = temperature(fact_t_n, forecast_t_n);
-    
-    fact_p_n = table2cell(data(4:68,6));
-    forecast_p_n = table2cell(data(4:68,7));
-    p_night = precipitation(fact_p_n, forecast_p_n, fact_t_n, t_lim);
-    
-    %==================== phenomenons =========================================
-    forecast_wind_n = num2cell(str2double(table2cell(data(4:68,21))));
-    fact_wind_n = num2cell(str2double(table2cell(data(4:68,9))));
-    wind_night = wind_func(fact_wind_n, forecast_wind_n);
-    
-    phen_fore_n = table2cell(data(4:68,22:32));
-    phen_fact_n = table2cell(data(4:68,10:20));
-    assessment_night = phen_assessment(wind_night, phen_fore_n, phen_fact_n);
-    
-    overall_assessment_night = overallAssess(t_night,p_night,assessment_night);
-    % =============================== day =====================================
-    % =========================================================================
-    
-    fact_t_d = table2cell(data(4:68,37));
-    forecast_t_d = table2cell(data(4:68,38));
-    t_day = temperature(fact_t_d, forecast_t_d);
-    
-    fact_p_d = table2cell(data(4:68,40));
-    forecast_p_d = table2cell(data(4:68,41));
-    p_day = precipitation(fact_p_d, forecast_p_d, fact_t_d, t_lim);
-    
-    %==================== phenomenons =========================================
-    fact_wind_d = num2cell(str2double(table2cell(data(4:68,43))));
-    forecast_wind_d = num2cell(str2double(table2cell(data(4:68,55))));
-    wind_day = wind_func(fact_wind_d, forecast_wind_d);
-    
-    phen_fore_d = table2cell(data(4:68,56:66));
-    phen_fact_d = table2cell(data(4:68,44:54));
-    assessment_day = phen_assessment(wind_day, phen_fore_d, phen_fact_d);
-    
-    overall_assessment_day = overallAssess(t_day,p_day, assessment_day);
-    
+    if nargin == 11
+        stations = table2cell(data(4:68,2));
+        phenomenons = table2cell(data(2,9:20));
+        
+        fact_t_n = table2cell(data(4:68,3));
+        forecast_t_n = table2cell(data(4:68,4));
+        t_night = temperature(fact_t_n, forecast_t_n);
+        
+        fact_p_n = table2cell(data(4:68,6));
+        forecast_p_n = table2cell(data(4:68,7));
+        p_night = precipitation(fact_p_n, forecast_p_n, fact_t_n, t_lim);
+        
+        %==================== phenomenons =========================================
+        forecast_wind_n = num2cell(str2double(table2cell(data(4:68,21))));
+        fact_wind_n = num2cell(str2double(table2cell(data(4:68,9))));
+        wind_night = wind_func(fact_wind_n, forecast_wind_n);
+        
+        phen_fore_n = table2cell(data(4:68,22:32));
+        phen_fact_n = table2cell(data(4:68,10:20));
+        assessment_night = phen_assessment(wind_night, phen_fore_n, phen_fact_n);
+        
+        overall_assessment_night = overallAssess(t_night,p_night,assessment_night);
+        % =============================== day =====================================
+        % =========================================================================
+        
+        fact_t_d = table2cell(data(4:68,37));
+        forecast_t_d = table2cell(data(4:68,38));
+        t_day = temperature(fact_t_d, forecast_t_d);
+        
+        fact_p_d = table2cell(data(4:68,40));
+        forecast_p_d = table2cell(data(4:68,41));
+        p_day = precipitation(fact_p_d, forecast_p_d, fact_t_d, t_lim);
+        
+        %==================== phenomenons =========================================
+        fact_wind_d = num2cell(str2double(table2cell(data(4:68,43))));
+        forecast_wind_d = num2cell(str2double(table2cell(data(4:68,55))));
+        wind_day = wind_func(fact_wind_d, forecast_wind_d);
+        
+        phen_fore_d = table2cell(data(4:68,56:66));
+        phen_fact_d = table2cell(data(4:68,44:54));
+        assessment_day = phen_assessment(wind_day, phen_fore_d, phen_fact_d);
+        
+        overall_assessment_day = overallAssess(t_day,p_day, assessment_day);
+        
+    elseif nargin == 10        
+        fact_t_n = night_assessment(4:68,3);
+        forecast_t_n = night_assessment(4:68,4);
+        t_night = temperature(fact_t_n, forecast_t_n);
+        
+        fact_p_n = night_assessment(4:68,6);
+        forecast_p_n = night_assessment(4:68,7);
+        p_night = precipitation(fact_p_n, forecast_p_n, fact_t_n, t_lim);
+        
+        %==================== phenomenons =========================================
+        forecast_wind_n = num2cell(str2double(night_assessment(4:68,21)));
+        fact_wind_n = num2cell(str2double(night_assessment(4:68,9)));
+        wind_night = wind_func(fact_wind_n, forecast_wind_n);
+        
+        phen_fore_n = night_assessment(4:68,22:32);
+        phen_fact_n = night_assessment(4:68,10:20);
+        assessment_night = phen_assessment(wind_night, phen_fore_n, phen_fact_n);
+        
+        overall_assessment_night = overallAssess(t_night,p_night,assessment_night);
+        % =============================== day =====================================
+        % =========================================================================
+        
+        fact_t_d = day_assessment(4:68,3);
+        forecast_t_d = day_assessment(4:68,4);
+        t_day = temperature(fact_t_d, forecast_t_d);
+        
+        fact_p_d = day_assessment(4:68,6);
+        forecast_p_d = day_assessment(4:68,7);
+        p_day = precipitation(fact_p_d, forecast_p_d, fact_t_d, t_lim);
+        
+        %==================== phenomenons =========================================
+        forecast_wind_d = num2cell(str2double(day_assessment(4:68,21)));
+        fact_wind_d = num2cell(str2double(day_assessment(4:68,9)));
+        wind_day = wind_func(fact_wind_d, forecast_wind_d);
+        
+        phen_fore_d = day_assessment(4:68,22:32);
+        phen_fact_d = day_assessment(4:68,10:20);
+        assessment_day = phen_assessment(wind_day, phen_fore_d, phen_fact_d);
+        
+        overall_assessment_day = overallAssess(t_day,p_day, assessment_day);
+    end
         
     
     % ============ NaN cleaner & main tables ==================================
     % =========================================================================
     % =============================== night ===================================
     % =========================================================================
-    night_assessment(4:end, 3) = fact_t_n;
-    night_assessment(4:end, 4) = forecast_t_n;
-    night_assessment(4:end, 6) = fact_p_n;
-    night_assessment(4:end, 7) = forecast_p_n;
-    
+    if nargin == 11
+        night_assessment(4:end, 3) = fact_t_n;
+        night_assessment(4:end, 4) = forecast_t_n;
+        night_assessment(4:end, 6) = fact_p_n;
+        night_assessment(4:end, 7) = forecast_p_n;
+    end
     
     calc_table(3:end-7, 4) = fact_t_n;
     calc_table(3:end-7, 6) = forecast_t_mean(forecast_t_n);
@@ -71,20 +114,22 @@ function [night_assessment, day_assessment, assessment_fullday, territorial_asse
         phen_fact_n(:,n) = nanClean(phen_fact_n(:,n));
     end
     
-    night_assessment(4:end,2) = stations;
-    day_assessment(4:end,2) = stations;
-    assessment_fullday(3:end,2) = stations;
-    calc_table(3:end-7, 2) = stations;
-    calc_table_p(3:end-13, 2) = stations;
-    calc_table_phen(3:end-13, 2) = stations;
-    night_assessment(3,9:20) = phenomenons;
-    night_assessment(3,21:32) = phenomenons;
-    day_assessment(3,9:20) = phenomenons;
-    day_assessment(3,21:32) = phenomenons;
-    calc_table_phen(2,3:14) = phenomenons;
-    calc_table_phen(2,15:26) = phenomenons;
-    calc_table_phen(2,28:39) = phenomenons;
-    calc_table_phen(2,40:51) = phenomenons;
+    if nargin == 11
+        night_assessment(4:end,2) = stations;
+        day_assessment(4:end,2) = stations;
+        assessment_fullday(3:end,2) = stations;
+        calc_table(3:end-7, 2) = stations;
+        calc_table_p(3:end-13, 2) = stations;
+        calc_table_phen(3:end-13, 2) = stations;
+        night_assessment(3,9:20) = phenomenons;
+        night_assessment(3,21:32) = phenomenons;
+        day_assessment(3,9:20) = phenomenons;
+        day_assessment(3,21:32) = phenomenons;
+        calc_table_phen(2,3:14) = phenomenons;
+        calc_table_phen(2,15:26) = phenomenons;
+        calc_table_phen(2,28:39) = phenomenons;
+        calc_table_phen(2,40:51) = phenomenons;
+    end
     
     night_assessment(4:end, 21) = forecast_wind_n;
     night_assessment(4:end, 9) = fact_wind_n;
@@ -94,11 +139,12 @@ function [night_assessment, day_assessment, assessment_fullday, territorial_asse
     
     % =============================== day =====================================
     % =========================================================================
-    day_assessment(4:end, 3) = fact_t_d;
-    day_assessment(4:end, 4) = forecast_t_d;
-    day_assessment(4:end, 6) = fact_p_d;
-    day_assessment(4:end, 7) = forecast_p_d;
-    
+    if nargin == 11
+        day_assessment(4:end, 3) = fact_t_d;
+        day_assessment(4:end, 4) = forecast_t_d;
+        day_assessment(4:end, 6) = fact_p_d;
+        day_assessment(4:end, 7) = forecast_p_d;
+    end
     
     calc_table(3:end-7, 11) = fact_t_d;
     calc_table(3:end-7, 13) = forecast_t_mean(forecast_t_d);
