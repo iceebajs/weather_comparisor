@@ -197,40 +197,40 @@ function [night_assessment, day_assessment, assessment_fullday, territorial_asse
     assessment_fullday(3:end,5) = nanClean(fullday_assess_pub);
     
     % Minsk
-    territorial_assessment(3,2) = assessment_fullday(24,4);
-    territorial_assessment(4,2) = assessment_fullday(24,3);
-    territorial_assessment(5,2) = assessment_fullday(24,5);
+    territorial_assessment(3,2) = assessment_fullday(25,4);
+    territorial_assessment(4,2) = assessment_fullday(25,3);
+    territorial_assessment(5,2) = assessment_fullday(25,5);
     
-    territorial_assessment(3,3) = num2cell(terr_assess(overall_assessment_day(22:34)));
-    territorial_assessment(4,3) = num2cell(terr_assess(overall_assessment_night(22:34)));
-    territorial_assessment(5,3) = num2cell(terr_assess(fullday_assess_pub(22:34)));
+    territorial_assessment(3,3) = num2cell(terr_assess(overall_assessment_day(23:36)));
+    territorial_assessment(4,3) = num2cell(terr_assess(overall_assessment_night(23:36)));
+    territorial_assessment(5,3) = num2cell(terr_assess(fullday_assess_pub(23:36)));
     
     % Brest
-    territorial_assessment(3,4) = assessment_fullday(46,4);
-    territorial_assessment(4,4) = assessment_fullday(46,3);
-    territorial_assessment(5,4) = assessment_fullday(46,5);
+    territorial_assessment(3,4) = assessment_fullday(48,4);
+    territorial_assessment(4,4) = assessment_fullday(48,3);
+    territorial_assessment(5,4) = assessment_fullday(48,5);
     
-    territorial_assessment(3,5) = num2cell(terr_assess(overall_assessment_day(44:54)));
-    territorial_assessment(4,5) = num2cell(terr_assess(overall_assessment_night(44:54)));
-    territorial_assessment(5,5) = num2cell(terr_assess(fullday_assess_pub(44:54)));
+    territorial_assessment(3,5) = num2cell(terr_assess(overall_assessment_day(46:56)));
+    territorial_assessment(4,5) = num2cell(terr_assess(overall_assessment_night(46:56)));
+    territorial_assessment(5,5) = num2cell(terr_assess(fullday_assess_pub(46:56)));
     
     % Gomel
-    territorial_assessment(3,6) = assessment_fullday(57,4);
-    territorial_assessment(4,6) = assessment_fullday(57,3);
-    territorial_assessment(5,6) = assessment_fullday(57,5);
+    territorial_assessment(3,6) = assessment_fullday(59,4);
+    territorial_assessment(4,6) = assessment_fullday(59,3);
+    territorial_assessment(5,6) = assessment_fullday(59,5);
     
-    territorial_assessment(3,7) = num2cell(terr_assess(overall_assessment_day(55:63)));
-    territorial_assessmentl(4,7) = num2cell(terr_assess(overall_assessment_night(55:63)));
-    territorial_assessment(5,7) = num2cell(terr_assess(fullday_assess_pub(55:63)));
+    territorial_assessment(3,7) = num2cell(terr_assess(overall_assessment_day(57:65)));
+    territorial_assessment(4,7) = num2cell(terr_assess(overall_assessment_night(57:65)));
+    territorial_assessment(5,7) = num2cell(terr_assess(fullday_assess_pub(57:65)));
     
     % Mogilev
-    territorial_assessment(3,8) = assessment_fullday(37,4);
-    territorial_assessment(4,8) = assessment_fullday(37,3);
-    territorial_assessment(5,8) = assessment_fullday(37,5);
+    territorial_assessment(3,8) = assessment_fullday(39,4);
+    territorial_assessment(4,8) = assessment_fullday(39,3);
+    territorial_assessment(5,8) = assessment_fullday(39,5);
     
-    territorial_assessment(3,9) = num2cell(terr_assess(overall_assessment_day(35:43)));
-    territorial_assessment(4,9) = num2cell(terr_assess(overall_assessment_night(35:43)));
-    territorial_assessment(5,9) = num2cell(terr_assess(fullday_assess_pub(35:43)));
+    territorial_assessment(3,9) = num2cell(terr_assess(overall_assessment_day(37:45)));
+    territorial_assessment(4,9) = num2cell(terr_assess(overall_assessment_night(37:45)));
+    territorial_assessment(5,9) = num2cell(terr_assess(fullday_assess_pub(37:45)));
     
     % Vitebsk
     territorial_assessment(3,10) = assessment_fullday(3,4);
@@ -246,9 +246,9 @@ function [night_assessment, day_assessment, assessment_fullday, territorial_asse
     territorial_assessment(4,12) = assessment_fullday(16,3);
     territorial_assessment(5,12) = assessment_fullday(16,5);
     
-    territorial_assessment(3,13) = num2cell(terr_assess(overall_assessment_day(14:21)));
-    territorial_assessment(4,13) = num2cell(terr_assess(overall_assessment_night(14:21)));
-    territorial_assessment(5,13) = num2cell(terr_assess(fullday_assess_pub(14:21)));
+    territorial_assessment(3,13) = num2cell(terr_assess(overall_assessment_day(14:22)));
+    territorial_assessment(4,13) = num2cell(terr_assess(overall_assessment_night(14:22)));
+    territorial_assessment(5,13) = num2cell(terr_assess(fullday_assess_pub(14:22)));
     
     % ============================= additional_assessment_table_temperature =========================
     calc_table(3:end-7,18) = mean_fullday(calc_table(3:end-7,4), calc_table(3:end-7,11));
