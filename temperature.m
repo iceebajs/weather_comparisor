@@ -20,14 +20,19 @@ try
                 assessment_t{n} = 'Ошибка';
                 continue;
             else
-                if ~isempty(fact_t{n}) && ~isempty(forecast_t{n})
-                    if fact_t{n} <= forecast_t{n}(1)
+                if ~isempty(fact_t{n}) && ~isempty(forecast_t{n})    
+                    if forecast_t{n}(1) > forecast_t{n}(2)
+                        tmp = forecast_t{n}(1);
+                        forecast_t{n}(1) = forecast_t{n}(2);
+                        forecast_t{n}(2) = tmp;
+                    end
+                    if fact_t{n} >= forecast_t{n}(1) && fact_t{n} <= forecast_t{n}(2)
+                        assessment_t{n} = 100;
+                        continue;
+                    elseif fact_t{n} <= forecast_t{n}(1)
                         temp = abs(fact_t{n}-forecast_t{n}(1));
                     elseif fact_t{n} >= forecast_t{n}(2)
                         temp = abs(fact_t{n}-forecast_t{n}(2));
-                    elseif fact_t{n} > forecast_t{n}(1) && fact_t{n} < forecast_t{n}(2)
-                        assessment_t{n} = 100;
-                        continue;
                     end
                 else
                     assessment_t{n} = 'Ошибка';
