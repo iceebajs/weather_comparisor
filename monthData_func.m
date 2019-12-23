@@ -23,7 +23,7 @@ if fileDate_pub(1) < 10
     temp_string = ['0', num2str(fileDate_pub(1)), '.'];
     temp_string = strcat(temp_string, num2str(fileDate_pub(2)));
 else
-    temp_string = strcat(num2str(fileDate_pub(1), '.'));
+    temp_string = strcat(num2str(fileDate_pub(1)), '.');
     temp_string = strcat(temp_string, num2str(fileDate_pub(2)));
 end
 
@@ -31,55 +31,85 @@ end
 date = temp_string;
 clear temp_string dateSample;
 
+formatValidation = zeros(length(list),1);
+for n = 1:length(list)
+    toDelete = [list(n).('folder'), '\', list(n).('name')];
+    
+    validation = '~';
+    validationResult = regexp(toDelete,validation,'match');
+    if ~isempty(validationResult) && validationResult{1} == '~'
+        formatValidation(n) = 1;
+        continue;
+    end
+    
+    validation = '\w*оценка_прогнозирования\w*';
+    validationResult = regexp(toDelete,validation,'match');
+    if isempty(validationResult)
+        formatValidation(n) = 1;
+        continue;
+    end
+    
+    validation = '\w*xls\w*';
+    validationResult = regexp(toDelete,validation,'match');
+    if isempty(validationResult)
+        formatValidation(n) = 1;
+    end
+end
+list(logical(formatValidation)) = [];
                 
 for n = 1:length(list)
-        % ========= fullday ===============
-        fullday = table2cell(readtable([list(n).('folder'), '\', list(n).('name')], 'Sheet', 3));
-        fullday = fullday(2:end, 5);
-        temp = 0;
-        iterations = 0;
-        for k = 1:length(fullday)
-            temp0 = str2double(fullday{k});            
-            if ~isnan(temp0)
-                temp = temp + temp0;
-                iterations = iterations + 1;
-            end            
+    fileFullpath = [list(n).('folder'), '\', list(n).('name')];
+    % ========= fullday ===============
+    fullday = table2cell(readtable(fileFullpath, 'Sheet', 3));
+    fullday = fullday(2:end, 5);
+    temp = 0;
+    iterations = 0;
+    for k = 1:length(fullday)
+        temp0 = str2double(fullday{k});
+        if ~isnan(temp0)
+            temp = temp + temp0;
+            iterations = iterations + 1;
         end
-        dataStorage{n,1} = temp/(iterations*100);
-        clear temp temp0 iterations;
-
-        %2-6
-        % ========= temperature ============
-        temperature = table2cell(readtable([list(n).('folder'), '\', list(n).('name')], 'Sheet', 5));
-        temperature = temperature(72, 5:10);
-        temperature(5) = [];
-        for k = 1:length(temperature)
-            dataStorage{n,k+1} = str2double(temperature{k});
-        end
-        
-        %7-12
-        % ========= precipitation ==========
-        prec = table2cell(readtable([list(n).('folder'), '\', list(n).('name')], 'Sheet', 6));
-        prec = prec(78, 3:8);
-        for k = 1:length(prec)
-            dataStorage{n,k+6} = str2double(prec{k});
-        end
-        
-        %13-20
-        % ========= phenomenons ============
-        phen = table2cell(readtable([list(n).('folder'), '\', list(n).('name')], 'Sheet', 7));
-        phen = phen(78, 3:10);
-        for k = 1:length(phen)
-            dataStorage{n,k+12} = str2double(phen{k});
-        end
+    end
+    dataStorage{n,1} = temp/(iterations*100);
+    clear temp temp0 iterations;
+    
+    %2-6
+    % ========= temperature ============
+    temperature = table2cell(readtable(fileFullpath, 'Sheet', 5));
+    temperature = temperature(72, 5:10);
+    temperature(5) = [];
+    for k = 1:length(temperature)
+        dataStorage{n,k+1} = str2double(temperature{k});
+    end
+    
+    %7-12
+    % ========= precipitation ==========
+    prec = table2cell(readtable(fileFullpath, 'Sheet', 6));
+    prec = prec(78, 3:8);
+    for k = 1:length(prec)
+        dataStorage{n,k+6} = str2double(prec{k});
+    end
+    
+    %13-20
+    % ========= phenomenons ============
+    phen = table2cell(readtable(fileFullpath, 'Sheet', 7));
+    phen = phen(78, 3:10);
+    for k = 1:length(phen)
+        dataStorage{n,k+12} = str2double(phen{k});
+    end
 end
 
 for n = 1:length(out)
     temp = 0;
+    divider = 0;
     for k = 1:length(dataStorage(:,1))
-        temp = temp + dataStorage{k,n};        
+        if ~isnan(dataStorage{k,n})
+            temp = temp + dataStorage{k,n};
+            divider = divider +1;
+        end
     end
-    out{n} = num2str(temp/length(dataStorage(:,1)) , 3);
+    out{n} = num2str((temp/divider) , 3);
 end
 
 calc_table_fullassess(3,2:end) = out;
