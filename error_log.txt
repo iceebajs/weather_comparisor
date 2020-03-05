@@ -1,0 +1,6 @@
+Fatal error. Date: 05-Mar-2020 09:47:38
+Cannot CD to  (Name is nonexistent or not a directory).
+-> line1219 in mainWindow.b_calculate_monthButtonPushed
+-> line330 in AppManagementService.tryCallback
+-> line0 in @(source,event)tryCallback(appdesigner.internal.service.AppManagementService.instance(),app,callback,requiresEventData,event)
+

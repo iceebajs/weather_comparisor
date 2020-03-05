@@ -418,7 +418,7 @@ function [night_assessment, day_assessment, assessment_fullday, territorial_asse
     calc_table_phen{78,13} = sum(strcmp(calc_table_phen(3:67,52), 'пропуск'));
     calc_table_phen{78,14} = sum(strcmp(calc_table_phen(3:67,52), 'отрицательный'));
     
-    calc_table_phen{79,13} = calc_table_phen{77,13} + calc_table_phen{78,14};
+    calc_table_phen{79,13} = calc_table_phen{77,13} + calc_table_phen{78,13};
     calc_table_phen{79,14} = calc_table_phen{77,14} + calc_table_phen{78,14};
     
     calc_table_phen{77,15} = calc_table_phen{77,13} + calc_table_phen{77,14};
